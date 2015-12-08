@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mysql',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -50,10 +51,16 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'urls'
 
+STATICFILES_DIRS = [
+    os.path.join(os.path.dirname(__file__), "static"),
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,14 +75,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wsgi.application'
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+SESSION_FILE_PATH = '/tmp'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.pymysql',
+        'HOST': 'localhost',
+        'NAME': 'autoo',
+        'USER': 'dev',
+        'PASSWORD': 'develop',
     }
 }
 

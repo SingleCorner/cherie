@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=11">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Language" content="zh-cn">
+	<meta http-equiv="Content-Type" content="text/html">
+	<meta name="description" content="自动化运维平台">
+	<title>cherie</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+{% block css %}
+{% endblock %}
+  <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="/static/js/jquery.sha1.js"></script>
+{% block script %}
+{% endblock %}
+</head>
+<body scroll=auto>
+	<!-- 顶栏开始 -->
+	<header>
+		<!-- 导航区 -->
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<!-- LOGO -->
+				<div class="navbar-header">
+		      <a class="navbar-brand" href="/">cherie</a>
+		    </div>
+				<!-- LOGO end -->
+				<!-- link -->
+				<div class="collapse navbar-collapse">
+{% block navigation %}
+{% endblock %}
+				</div> 
+				<!-- link end -->
+			</div>
+		</nav>
+		<!-- 导航区 end -->
+	</header>
+	<!-- 顶栏结束 -->
+	<!-- 主容器开始 -->
+	<div id="APP_main">
+
+{% block app %}
+{% endblock %}
+
+	</div>
+	<div id="infomation">
+	</div>
+	<!-- 主容器结束 -->
+	<!-- 页脚开始 -->
+	<footer id="APP_foot">
+		<div id="APP_foot_license">
+			<div>OpenSource project with MIT license</div>
+			<div>SingleConer</div>
+		</div>
+	</footer>
+	<!-- 页脚结束 -->
+</body>
+</html>

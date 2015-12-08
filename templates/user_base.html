@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block css %}
+	<link rel="stylesheet" href="/static/css/common.css" />
+{% endblock %}
+
+{% block script %}
+	<script src="/static/js/app.js"></script>
+{% endblock %}
+
+{% block navigation %}
+			<div class="pull-right">
+				当前用户：{{ request.session.user_name }}
+				<a href="/logout?key={{ request.session.logoutAuth }}">安全退出</a>
+			</div>
+{% endblock %}

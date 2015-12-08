@@ -7,5 +7,6 @@ from django.conf.urls import url
 from common import views
 
 urlpatterns = [
-    url(r'^$', views.test),
+    url(r'^$', views.USER_LOGIN),
+    url(r'^logout$', views.USER_LOGOUT),
 ]
