@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block navigation %}
-			<div class="pull-right">
-				当前用户：{{ request.session.user_name }}
-				<a href="/logout?key={{ request.session.logoutAuth }}">安全退出</a>
-			</div>
+      <ul class="nav navbar-nav navbar-right">
+				<li>当前用户：{{ request.session.user_name }}</li>
+        <li><a class="" href="/logout?key={{ request.session.logoutAuth }}">Sign Out</a></li>
+      </ul>
 {% endblock %}
