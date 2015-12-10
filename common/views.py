@@ -15,7 +15,7 @@ def USER_LOGIN(request):
       rsp = render(request, 'user_index.html', locals())
       return HttpResponse(rsp)
     else:
-        if 'a' in request.GET and request.GET['a'] == "login":
+        if 'act' in request.GET and request.GET['act'] == "login":
           user = request.POST['username']
           passwd = request.POST['password']
           user_query = Account.objects.filter(account = user, status = 1)

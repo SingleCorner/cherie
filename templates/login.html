@@ -9,41 +9,27 @@
 {% endblock %}
 
 {% block navigation %}
-      <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-          <ul class="nav navbar-nav">
-              <li class="hidden">
-                  <a href="#page-top"></a>
-              </li>
-              <li>
-                  <a class="page-scroll" href="/">About</a>
-              </li>
-              <li>
-                  <a class="page-scroll" href="/">Sign In</a>
-              </li>
-              <li>
-                  <a class="page-scroll" href="/">Sign Up</a>
-              </li>
-          </ul>
-      </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="page-scroll" href="/">About</a></li>
+          <li><a class="page-scroll" href="/">Sign Up</a></li>
+        </ul>
 {% endblock %}
 
 {% block app %}
-  <div id="USER_login">
-    <form id="USER_login_form" action="?a=login" method="post">
-      <input type="hidden" id="USER_login_timestamp" value= '{{ request.session.loginTime }}' >
-      <ul>
-        <li>
-          <input type="text" name="username" id="USER_login_user" placeholder="username" />
-        </li>
-        <li>
-          <input type="password" name="password" id="USER_login_pswd" placeholder="password" autocomplete="off" />
-        </li>
-        <li id="USER_login_buttons">
-          <input type="submit" value="登录" id="USER_login_submit" title="登录" />
-        </li>
-      </ul>
+  <div id="cherie_login">
+    <form id="USER_login">
+      <input type="hidden" id="USER_login_timestamp" value="{{ request.session.loginTime }}">
+      <div class="form-group">
+        <input type="text" class="form-control" id="USER_login_user" placeholder="username">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="USER_login_pswd" placeholder="password" autocomplete="off">
+      </div>
+      <button type="submit" class="form-control btn btn-primary">Login</button>
+      <div class="form-group">
+        <div id="USER_login_status"></div>
+      </div>
     </form>
-    <div id="USER_login_status"></div>
   </div>
 {% endblock %}
 

@@ -1,5 +1,5 @@
 html, body {
-	padding-top: 60px;
+	padding-top: 70px;
 	background: #333;
 }
 
@@ -18,4 +18,22 @@ body > footer {
 	-moz-text-shadow: 0px 0px 5px rgba(0, 0, 0, 1.00);
 	-ms-text-shadow: 0px 0px 5px rgba(0, 0, 0, 1.00);
 	-o-text-shadow: 0px 0px 5px rgba(0, 0, 0, 1.00);
+}
+
+#cherie_login{
+	margin: auto;
+	width: 250px;
+	height: 150px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+#USER_login_status {
+	margin-top: 20px;
+	font-family: "Microsoft Yahei", Tahoma, Simsun;
+	font-size: 12px;
+	text-align: center;
+	color: #AAA;
 }

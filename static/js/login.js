@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('#USER_login_form').submit(function(evt) {
+	$('#USER_login').submit(function(evt) {
 		// 阻断默认提交过程
 		evt.preventDefault();
 		
@@ -9,14 +9,14 @@ $(document).ready(function() {
 		var time = $('#USER_login_timestamp').val();
 		
 		// 检查输入
-		if (user.length < 4 || user.length > 5) {
-			$('#USER_login_status').html("No No No,工号貌似错了>_< ");
+		if (user.length == 0) {
+			$('#USER_login_status').html("No No No,请认真告诉我你叫什么>_< ");
 			$('#USER_login_user').focus();
 			return false;
 		}
 		
 		if (pswd.length == 0) {
-			$('#USER_login_status').html("乃不能丢掉密码君");
+			$('#USER_login_status').html("密码君不见啦");
 			$('#USER_login_pswd').focus();
 			return false;
 		}
@@ -31,11 +31,10 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: 'POST',
-			url: './?a=login',
+			url: './?act=login',
 			data: {
 				'username': user,
 				'password': pswd,
-				'encrypto': 'on'
 			},
 			timeout: 5000,
 			success: function(data, status, xhr) {

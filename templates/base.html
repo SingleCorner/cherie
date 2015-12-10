@@ -26,14 +26,17 @@
 			<div class="container-fluid">
 				<!-- LOGO -->
 				<div class="navbar-header">
-          <button type="button" class="navbar-toggle" >
-              <i class="fa fa-bars"></i>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-ham" aria-expanded="false" >
+          	<span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
           </button>
 		      <a class="navbar-brand" href="/">cherie</a>
 		    </div>
 				<!-- LOGO end -->
 				<!-- link -->
-				<div class="collapse navbar-collapse">
+				<div class="collapse navbar-collapse" id="navbar-ham">
 {% block navigation %}
 {% endblock %}
 				</div> 
@@ -44,13 +47,11 @@
 	</header>
 	<!-- 顶栏结束 -->
 	<!-- 主容器开始 -->
-	<div>
+	<div class="container">
 
 {% block app %}
 {% endblock %}
 
-	</div>
-	<div id="infomation">
 	</div>
 	<!-- 主容器结束 -->
 	<!-- 页脚开始 -->
