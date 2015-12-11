@@ -1,7 +1,8 @@
 $(document).ready(function() {
-	$(document).scroll(navbar_ajust);
-	navbar_ajust();
 
+	if ($('li').hasClass('active')) {
+		$('li').removeClass('active');
+	}
 });
 
 

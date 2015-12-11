@@ -14,3 +14,22 @@
         <li><a class="" href="/logout?key={{ request.session.logoutAuth }}">Sign Out</a></li>
       </ul>
 {% endblock %}
+
+{% block app %}
+		<div class="row">
+			<div class="col-xs-4 col-sm-3 col-md-2" role="navigation">
+				<ul class="nav nav-pills nav-stacked">
+		  		<li id="nav-item-1"><a href="/">Summary</a></li>
+		  		<li id="nav-item-2"><a href="/">Users &amp; groups</a></li>
+		  		<li id="nav-item-3"><a href="/">Assets</a></li>
+		  		<li id="nav-item-4"><a href="/">Ops</a></li>
+		  		<li id="nav-item-5"><a href="/">Monitoring</a></li>
+		  		<li id="nav-item-6"><a href="/">History</a></li>
+				</ul>
+			</div>
+			<div class="col-xs-8 col-sm-9 col-md-10">
+			{% block data %}
+			{% endblock %}
+			</div>
+		</div>
+{% endblock %}

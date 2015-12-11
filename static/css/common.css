@@ -19,9 +19,6 @@ body {
 	color: #FFF;
 	background: #333;
 }
-body.scroll {
-	padding-top: 50px;
-}
 body > footer {
 	position: fixed;
 	bottom: 0;
@@ -32,7 +29,7 @@ body > footer {
 	font-family: "Microsoft Yahei", Tahoma, Simsun;
 	font-size: 12px;
 	color: #FFF;
-	background: #333;
+	background: #222;
 	text-shadow: 0px 0px 5px rgba(0, 0, 0, 1.00);
 	-webkit-text-shadow: 0px 0px 5px rgba(0, 0, 0, 1.00);
 	-moz-text-shadow: 0px 0px 5px rgba(0, 0, 0, 1.00);
@@ -74,39 +71,6 @@ h3 {
 	color: red;
 }
 
-center a {
-	margin-left: 20px;
-	cursor: pointer:
-}
-
-
-textarea {
-	resize: none;
-	padding: 5px;
-	border: 1px solid #DDD;
-	-webkit-border-radius: 1px;
-	-moz-border-radius: 1px;
-	-ms-border-radius: 1px;
-	-o-border-radius: 1px;
-	border-radius: 1px;
-	font-family: "Microsoft Yahei", Tahoma, Simsun;
-	font-size: 14px;
-	color: #555;
-	background: #FFF;
-	-webkit-transition: -webkit-box-shadow 500ms, border 500ms;
-	-moz-transition: -moz-box-shadow 500ms, border 500ms;
-	-ms-transition: -ms-box-shadow 500ms, border 500ms;
-	-o-transition: -o-box-shadow 500ms, border 500ms;
-	transition: box-shadow 500ms, border 500ms;
-}
-
-textarea:focus {
-	outline: none;
-	border-color: #20C3F9;
-	-webkit-box-shadow: 0px 0px 4px rgba(0, 163, 217, 0.30);
-	box-shadow: 0px 0px 4px rgba(0, 163, 217, 0.30);
-}
-
 .span1 { width: 70px; }
 .span2 { width: 140px; }
 .span3 { width: 210px; }
@@ -117,14 +81,6 @@ textarea:focus {
 .span8 { width: 560px; }
 .span9 { width: 630px; }
 
-body.scroll #APP_top {
-	position: fixed;
-	top: -60px;
-	right: 0;
-	left: 0;
-	-webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 1.00);
-	box-shadow: 0px 0px 5px rgba(0, 0, 0, 1.00);
-}
 /*
 	前台CSS
 */
