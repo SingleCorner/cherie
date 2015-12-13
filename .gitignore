@@ -55,3 +55,8 @@ docs/_build/
 
 # PyBuilder
 target/
+
+bootstrap-theme.min.css
+bootstrap.min.css
+bootstrap.min.js
+jquery.min.js
