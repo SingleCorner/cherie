@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block css%}
+  <link rel="stylesheet" href="/static/css/unsignin.css">
+{% endblock %}
+
+{% block script %}
+  <script src="/static/js/unsignin.js"></script>
+{% endblock %}
+
+{% block navigation %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="page-scroll" href="/">About</a></li>
+          <li><a class="page-scroll" href="/">Sign Up</a></li>
+        </ul>
+{% endblock %}
+
+{% block app %}
+  <div id="cherie_login">
+    <form id="USER_login">
+      <input type="hidden" id="USER_login_timestamp" value="{{ request.session.loginTime }}">
+      <div class="form-group">
+        <input type="text" class="form-control" id="USER_login_user" placeholder="username">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="USER_login_pswd" placeholder="password" autocomplete="off">
+      </div>
+      <button type="submit" class="form-control btn btn-primary">Login</button>
+      <div class="form-group">
+        <div id="USER_login_status"></div>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+

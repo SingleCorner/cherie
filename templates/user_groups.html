@@ -1,0 +1,32 @@
+{% extends "user_base.html"%}
+
+{% block data %}
+<table class="table">
+	<thead>
+		<tr>
+			<th>账号</th>
+			<th>姓名</th>
+			<th>状态</th>
+	    <th>创建</th>
+			<th>操作</th>
+		</tr>
+  {% for accnt in account_list %}
+    <tr>
+      <td>{{ accnt.account }}</td>
+      <td>{{ accnt.name }}</td>
+    {% ifequal accnt.status 1 %}
+      <td>可登录</td>
+    {% else %}
+      <td>已禁用</td>
+    {% endifequal %}
+      <td>{{ accnt.regist_time }}</td>
+      <td>
+        <button class="btn btn-success">Block</button>
+      </td>
+    </tr>
+  {% endfor %}
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+{% endblock %}
