@@ -12,9 +12,27 @@ import json
 from mysql.models import *
 
 def user_signup(request):
-  rsp = render(request, 'user_groups.html', locals())
-  return HttpResponse(rsp)
-
+  if 'act' in request.POST and request.POST['act'] == "signup":
+    account = request.POST['username']
+    passwd = make_password(request.POST['password'], None, 'pbkdf2_sha256')
+    date = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
+    try:
+      obj = Account(account=account,
+                    secpasswd=passwd,
+                    status=1,
+                    regist_time=date,
+                    )
+      obj.save()
+      result = {}
+      result['code'] = 1
+      result['message'] = date
+    except:
+      result = {}
+      result['code'] = -1
+      result['message'] = "注册失败"
+    return HttpResponse(json.dumps(result), content_type="application/json")
+  else:
+    return HttpResponseRedirect('/')
 def user_signin(request):
   if 'loginToken' in request.session:
     return HttpResponseRedirect('/user/summary')

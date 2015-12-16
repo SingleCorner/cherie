@@ -31,7 +31,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: 'POST',
-			url: './signin',
+			url: '/signin',
 			data: {
 				'act': "signin",
 				'username': user,
@@ -71,10 +71,45 @@ $(document).ready(function() {
 
 	// 设置焦点
 	$('#USER_login_user').focus();
-	PressEnter();
+	//PressEnter();
 });
-function PressEnter() { 
-var e = jQuery.Event("keypress");//模拟一个键盘事件 
-e.keyCode = 122; 
-$('body').trigger(e);
+
+function signup() { 
+	var user = $('#USER_login_user').val();
+	var pswd = $('#USER_login_pswd').val();
+	alert(user);
+	alert(pswd);
+	$.ajax({
+		type: 'POST',
+		url: '/signup',
+		data: {
+			'act': "signup",
+			'username': user,
+			'password': pswd,
+		},
+		timeout: 5000,
+		success: function(data, status, xhr) {
+			if (data.code == 1) {
+				$('#USER_login_status').html('注册成功');
+				//setTimeout(function(){
+				//		window.location = data.referer || './';
+				//	},1000
+				//);					
+			} else {
+				if (data.code == -1) {
+					$('#USER_login_pswd').val('');
+					$('#USER_login_pswd').focus();
+				}
+				$('#USER_login_status').html(data.message);
+			}
+		},
+		error: function(data) {
+			$('#USER_login_user').val('');
+			$('#USER_login_user').focus();
+			$('#USER_login_pswd').val('');
+			$('#USER_login_status').html(data.responseText);
+
+		},
+		dataType: 'json'
+	});
 } 
