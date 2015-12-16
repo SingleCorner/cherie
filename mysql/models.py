@@ -14,17 +14,29 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Account(models.Model):
-    id = models.IntegerField(primary_key=True)
-    account = models.CharField(unique=True, max_length=5, blank=True)
-    name = models.CharField(max_length=8, blank=True)
-    passwd = models.CharField(max_length=40, blank=True)
-    secpasswd = models.CharField(max_length=80, blank=True)
-    tel = models.CharField(max_length=11, blank=True)
-    mail = models.CharField(max_length=40, blank=True)
-    status = models.IntegerField(blank=True, null=True)
-    regist_time = models.CharField(max_length=20, blank=True)
-    authorize = models.CharField(max_length=40, blank=True)
-    module = models.CharField(max_length=50, blank=True)
-    class Meta:
-        managed = False
-        db_table = 'Account'
+  uid = models.IntegerField(primary_key=True)
+  account = models.CharField(unique=True, max_length=5, blank=True)
+  name = models.CharField(max_length=8, blank=True)
+  secpasswd = models.CharField(max_length=80, blank=True)
+  tel = models.CharField(max_length=11, blank=True)
+  mail = models.CharField(max_length=40, blank=True)
+  status = models.IntegerField(blank=True, null=True)
+  regist_time = models.CharField(max_length=20, blank=True)
+  class Meta:
+      db_table = 'Account'
+
+class Group(models.Model):
+  gid = models.IntegerField(primary_key=True)    
+  name = models.CharField(max_length=10, blank=True)
+  uid = models.ForeignKey(Account, db_column='uid')
+  class Meta:
+      db_table = 'Group'
+
+class GroupAuthorize(models.Model):
+  id = models.IntegerField(primary_key=True)    
+  gid = models.ForeignKey(Group, db_column='gid')
+  uid = models.ForeignKey(Account, db_column='uid')
+  privilege = models.IntegerField()
+  class Meta:
+      db_table = 'GroupAuthorize'
+

@@ -7,6 +7,12 @@ from django.conf.urls import url
 from common import views
 
 urlpatterns = [
-    url(r'^$', views.USER_LOGIN),
-    url(r'^logout$', views.USER_LOGOUT),
+    url(r'^$', views.user_dashboard),
+    url(r'^signin$', views.user_signin),
+    url(r'^signout$', views.user_signout),
+    url(r'^signup$', views.user_signup),
+    #url(r'^user$', views.user_module),
+    url(r'^user/(?P<module>.*)/(?P<id>.*)$', views.user_module),
+    url(r'^admin$', views.admin_module),
+   url(r'^admin/(?P<module>.*)/(?P<id>.*)$', views.admin_module),
 ]

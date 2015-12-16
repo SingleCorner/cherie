@@ -15,7 +15,7 @@
 {% block navigation %}
       <ul class="nav navbar-nav navbar-right">
 				<li><a href="">{{ request.session.user_name }}</a></li>
-        <li><a class="" href="/logout?key={{ request.session.logoutAuth }}">Sign Out</a></li>
+        <li><a class="" href="/signout?key={{ request.session.logoutAuth }}">Sign Out</a></li>
       </ul>
 {% endblock %}
 
@@ -23,12 +23,12 @@
 		<div class="row">
 			<div class="col-xs-4 col-sm-3 col-md-2" role="navigation">
 				<ul class="nav nav-pills nav-stacked">
-		  		<li id="nav-item-1"><a href="/">Summary</a></li>
-		  		<li id="nav-item-2"><a href="/">Users &amp; groups</a></li>
-		  		<li id="nav-item-3"><a href="/">Assets</a></li>
-		  		<li id="nav-item-4"><a href="/">Ops</a></li>
-		  		<li id="nav-item-5"><a href="/">Monitoring</a></li>
-		  		<li id="nav-item-6"><a href="/">History</a></li>
+		  		<li id="nav-item-1"><a href="/user/summary">Summary</a></li>
+		  		<li id="nav-item-2"><a href="/user/groups">Users &amp; groups</a></li>
+		  		<li id="nav-item-3"><a href="/user/assets">Assets</a></li>
+		  		<li id="nav-item-4"><a href="/user/ops">Ops</a></li>
+		  		<li id="nav-item-5"><a href="/user/monitor">Monitoring</a></li>
+		  		<li id="nav-item-6"><a href="/user/history">History</a></li>
 				</ul>
 			</div>
 			<div class="col-xs-8 col-sm-9 col-md-10">
