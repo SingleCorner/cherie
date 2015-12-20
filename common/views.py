@@ -33,6 +33,7 @@ def user_signup(request):
     return HttpResponse(json.dumps(result), content_type="application/json")
   else:
     return HttpResponseRedirect('/')
+
 def user_signin(request):
   if 'loginToken' in request.session:
     return HttpResponseRedirect('/user/summary')
@@ -51,7 +52,7 @@ def user_signin(request):
         request.session['loginToken'] = "LoginAccess"
         request.session['logoutAuth'] = "".join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 4)).replace(' ','').upper()
         request.session['user_id'] = user_query[0].uid
-        request.session['user_name'] = user_query[0].name
+        request.session['user_name'] = user_query[0].account
         #判断后台进入权限
         if user_query[0].uid == 1:
           request.session['user_admin'] = 1
@@ -85,7 +86,12 @@ def user_dashboard(request):
 def user_module(request, module="", id=""):
   if 'loginToken' in request.session:
     if module == "groups":
-      account_list = Account.objects.all()
+      group_list = Group.objects.filter(uid = request.session['user_id'])
+      grpauth_list = GroupAuthorize.objects.select_related().filter(uid = request.session['user_id'])
+      rsp = render(request, 'user_groups.html', locals())
+      return HttpResponse(rsp)
+    elif module == "assets":
+      group_list = Group.objects.all()
       rsp = render(request, 'user_groups.html', locals())
       return HttpResponse(rsp)
     else:

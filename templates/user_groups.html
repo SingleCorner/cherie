@@ -4,29 +4,60 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>账号</th>
-			<th>姓名</th>
-			<th>状态</th>
-	    <th>创建</th>
+			<th>所有权组名</th>
+			<th>管理权组名</th>
+			<th>运维权组名</th>
+	    <th>查看权组名</th>
 			<th>操作</th>
 		</tr>
-  {% for accnt in account_list %}
+  </thead>
+  <tbody>
+  {% for group in group_list %}
     <tr>
-      <td>{{ accnt.account }}</td>
-      <td>{{ accnt.name }}</td>
-    {% ifequal accnt.status 1 %}
-      <td>可登录</td>
-    {% else %}
-      <td>已禁用</td>
-    {% endifequal %}
-      <td>{{ accnt.regist_time }}</td>
+      <td>{{ group.name }}</td>
+      <td></td>
+      <td></td>
+      <td></td>
       <td>
-        <button class="btn btn-success">Block</button>
+        <input type="text">
+        <button class="btn btn-success">invite</button>
+        <button class="btn btn-danger">unsign</button>
+        <button class="btn btn-primary">运维模式</button>
+        <button class="btn btn-primary">查看模式</button>
       </td>
     </tr>
   {% endfor %}
-	</thead>
-	<tbody>
+
+  {% for grpauth in grpauth_list %}
+    <tr>
+      <td></td>
+    {% ifequal grpauth.privilege 0 %}
+      <td>{{ grpauth.gid.name }}</td>
+    {% else %}
+      <td></td>
+    {% endifequal %}
+    {% ifequal grpauth.privilege 1 %}
+      <td>{{ grpauth.gid.name }}</td>
+    {% else %}
+      <td></td>
+    {% endifequal %}
+    {% ifequal grpauth.privilege 2 %}
+      <td>{{ grpauth.gid.name }}</td>
+    {% else %}
+      <td></td>
+    {% endifequal %}
+      <td>
+      {% ifequal grpauth.privilege 0 %}
+        <input type="text">
+        <button class="btn btn-success">invite</button>
+        <button class="btn btn-danger">unsign</button>
+        <button class="btn btn-success">运维模式</button>
+        <button class="btn btn-primary">查看模式</button>
+      {% endifequal %}
+      </td>
+    </tr>
+  {% endfor %}
+
 	</tbody>
 </table>
 {% endblock %}
