@@ -15,7 +15,7 @@ from django.db import models
 
 class Account(models.Model):
   uid = models.IntegerField(primary_key=True)
-  account = models.CharField(unique=True, max_length=15, blank=True)
+  account = models.CharField(unique=True, max_length=15, blank=False)
   secpasswd = models.CharField(max_length=80, blank=True)
   tel = models.CharField(max_length=11, blank=True)
   mail = models.CharField(max_length=40, blank=True)

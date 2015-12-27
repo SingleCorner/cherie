@@ -83,7 +83,7 @@ def user_dashboard(request):
     rsp = render(request, 'login.html', locals())
     return HttpResponse(rsp)
 
-def user_module(request, module="", id=""):
+def user_module(request, module, sid):
   if 'loginToken' in request.session:
     if module == "groups":
       group_list = Group.objects.filter(uid = request.session['user_id'])
@@ -92,7 +92,7 @@ def user_module(request, module="", id=""):
       return HttpResponse(rsp)
     elif module == "assets":
       group_list = Group.objects.all()
-      rsp = render(request, 'user_groups.html', locals())
+      rsp = render(request, 'developing.html', locals())
       return HttpResponse(rsp)
     else:
       rsp = render(request, 'developing.html', locals())
@@ -100,6 +100,6 @@ def user_module(request, module="", id=""):
   else:
     return HttpResponseRedirect('/')
 
-def admin_module(request, module="", action=""):
-  rsp = render(request, 'user_groups.html', locals())
+def admin_module(request, module, sid):
+  rsp = render(request, 'developing.html', locals())
   return HttpResponse(rsp)

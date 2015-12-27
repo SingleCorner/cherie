@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^signout$', views.user_signout),
     url(r'^signup$', views.user_signup),
     #url(r'^user$', views.user_module),
-    url(r'^user/(?P<module>.*)/(?P<id>.*)$', views.user_module),
-    url(r'^admin$', views.admin_module),
-   url(r'^admin/(?P<module>.*)/(?P<id>.*)$', views.admin_module),
+    url(r'^user/(?P<module>.*)/(?P<sid>.*)$', views.user_module),
+    #url(r'^admin$', views.admin_module),
+   url(r'^admin/(?P<module>.*)/(?P<sid>.*)$', views.admin_module),
 ]

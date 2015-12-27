@@ -77,8 +77,20 @@ $(document).ready(function() {
 function signup() { 
 	var user = $('#USER_login_user').val();
 	var pswd = $('#USER_login_pswd').val();
-	alert(user);
-	alert(pswd);
+
+	// 检查输入
+	if (user.length == 0) {
+		$('#USER_login_status').html("不要做无名氏>_<");
+		$('#USER_login_user').focus();
+		return false;
+	}
+	
+	if (pswd.length == 0) {
+		$('#USER_login_status').html("敲门砖给一个呗");
+		$('#USER_login_pswd').focus();
+		return false;
+	}
+
 	$.ajax({
 		type: 'POST',
 		url: '/signup',

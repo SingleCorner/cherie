@@ -1,6 +1,13 @@
 {% extends "user_base.html"%}
 
 {% block data %}
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active" id="subnav"><a href="/user/groups">ALL</a></li>
+  {% for group in group_list %}
+  <li role="presentation" class="active" id="subnav-{{ group.gid }}"><a href="/user/groups/{{ group.gid }}">{{ group.name }}</a></li>
+  {% endfor %}
+  <li role="presentation"><a href="#">+</a></li>
+</ul>
 <table class="table">
 	<thead>
 		<tr>
@@ -8,7 +15,6 @@
 			<th>管理权组名</th>
 			<th>运维权组名</th>
 	    <th>查看权组名</th>
-			<th>操作</th>
 		</tr>
   </thead>
   <tbody>
@@ -18,13 +24,6 @@
       <td></td>
       <td></td>
       <td></td>
-      <td>
-        <input type="text">
-        <button class="btn btn-success">invite</button>
-        <button class="btn btn-danger">unsign</button>
-        <button class="btn btn-primary">运维模式</button>
-        <button class="btn btn-primary">查看模式</button>
-      </td>
     </tr>
   {% endfor %}
 
@@ -46,15 +45,6 @@
     {% else %}
       <td></td>
     {% endifequal %}
-      <td>
-      {% ifequal grpauth.privilege 0 %}
-        <input type="text">
-        <button class="btn btn-success">invite</button>
-        <button class="btn btn-danger">unsign</button>
-        <button class="btn btn-success">运维模式</button>
-        <button class="btn btn-primary">查看模式</button>
-      {% endifequal %}
-      </td>
     </tr>
   {% endfor %}
 
