@@ -81,6 +81,9 @@ h3 {
 .span8 { width: 560px; }
 .span9 { width: 630px; }
 
+.modal {
+	color: #000;
+}
 /*
 	前台CSS
 */

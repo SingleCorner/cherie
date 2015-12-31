@@ -2,52 +2,77 @@
 
 {% block data %}
 <ul class="nav nav-tabs">
-  <li role="presentation" class="active" id="subnav"><a href="/user/groups">ALL</a></li>
+  <li role="presentation" class="active" id="subnav-"><a href="/user/groups">ALL</a></li>
   {% for group in group_list %}
-  <li role="presentation" class="active" id="subnav-{{ group.gid }}"><a href="/user/groups/{{ group.gid }}">{{ group.name }}</a></li>
+  <li role="presentation" class="active" id="subnav-{{ group.gid.gid }}">
+    <a href="/user/groups/{{ group.gid.gid }}">
+      {{ group.gid.name }}
+      {% ifequal group.privilege 0 %}
+        (管理)
+      {% endifequal %}
+      {% ifequal group.privilege 1 %}
+        (运维)
+      {% endifequal %}
+      {% ifequal group.privilege 2 %}
+        (查看)
+      {% endifequal %}
+    </a>
+  </li>
   {% endfor %}
-  <li role="presentation"><a href="#">+</a></li>
+  <li role="presentation" id="addGrp"><a href="" data-toggle="modal" data-target="#addGroup">+</a></li>
+  <div class="modal fade" id="addGroup" tabindex="-1" role="dialog" aria-labelledby="addGroupLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addGroupLabel">添加用户组</h4>
+        </div>
+        <div class="modal-body">
+          <form id="addGroup_submit">
+            <div class="form-group">
+                <input type="text" class="form-control" id="addGroup_name" placeholder="Group name">
+              </div>
+            </div>
+            <center id="addGroup_info"></center>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add Group</button>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
 </ul>
 <table class="table">
 	<thead>
 		<tr>
-			<th>所有权组名</th>
-			<th>管理权组名</th>
-			<th>运维权组名</th>
-	    <th>查看权组名</th>
+			<th>组名</th>
+			<th>成员</th>
+			<th>权限</th>
+	    <th>操作</th>
 		</tr>
   </thead>
   <tbody>
-  {% for group in group_list %}
-    <tr>
-      <td>{{ group.name }}</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  {% endfor %}
-
   {% for grpauth in grpauth_list %}
     <tr>
-      <td></td>
-    {% ifequal grpauth.privilege 0 %}
       <td>{{ grpauth.gid.name }}</td>
-    {% else %}
-      <td></td>
+      <td>{{ grpauth.uid.account }}</td>
+    {% ifequal grpauth.privilege 0 %}
+      <td>管理员</td>
     {% endifequal %}
     {% ifequal grpauth.privilege 1 %}
-      <td>{{ grpauth.gid.name }}</td>
-    {% else %}
-      <td></td>
+      <td>运维</td>
     {% endifequal %}
     {% ifequal grpauth.privilege 2 %}
-      <td>{{ grpauth.gid.name }}</td>
-    {% else %}
+      <td>查看</td>
+    {% endifequal %}
+    {% ifequal grpauth.gid.uid.uid request.session.user_id %}
+      <td><button class="btn-danger">删除组</button></td>
+    {% else %}  
       <td></td>
     {% endifequal %}
     </tr>
   {% endfor %}
-
 	</tbody>
 </table>
 {% endblock %}

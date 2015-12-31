@@ -28,6 +28,7 @@ class Group(models.Model):
   gid = models.IntegerField(primary_key=True)    
   name = models.CharField(max_length=10, blank=True)
   uid = models.ForeignKey(Account, db_column='uid')
+  status = models.IntegerField(blank=True)
   class Meta:
       db_table = 'Group'
 

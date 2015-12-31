@@ -86,8 +86,11 @@ def user_dashboard(request):
 def user_module(request, module, sid):
   if 'loginToken' in request.session:
     if module == "groups":
-      group_list = Group.objects.filter(uid = request.session['user_id'])
-      grpauth_list = GroupAuthorize.objects.select_related().filter(uid = request.session['user_id'])
+      group_list = GroupAuthorize.objects.select_related().filter(uid = request.session['user_id'])
+      if sid == "":
+        grpauth_list = group_list
+      else:
+        grpauth_list = GroupAuthorize.objects.select_related().filter(gid = sid)
       rsp = render(request, 'user_groups.html', locals())
       return HttpResponse(rsp)
     elif module == "assets":
@@ -103,3 +106,33 @@ def user_module(request, module, sid):
 def admin_module(request, module, sid):
   rsp = render(request, 'developing.html', locals())
   return HttpResponse(rsp)
+
+def data_execute(request):
+  result = {}
+  try:
+    module = request.POST['module']
+    action = request.POST['action']  
+  except:
+    module = ""
+    action = ""
+    result['code'] = 0
+    result['message'] = "拒绝非法访问"
+  if module == "group":
+    if action == "add":      
+      try:
+        name = request.POST['addGroup_name']
+        obj = Group(name=name,
+                    uid=Account.objects.get(uid = request.session['user_id']),
+                    status=1,
+                    )
+        obj.save()
+        result['code'] = 0
+        result['message'] = "创建组成功"
+      except:
+        result['code'] = 1
+        result['message'] = "创建组失败"
+    else:
+      pass
+  else:
+    pass
+  return HttpResponse(json.dumps(result), content_type="application/json")
