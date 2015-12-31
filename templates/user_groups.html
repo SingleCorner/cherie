@@ -19,24 +19,24 @@
     </a>
   </li>
   {% endfor %}
-  <li role="presentation" id="addGrp"><a href="" data-toggle="modal" data-target="#addGroup">+</a></li>
-  <div class="modal fade" id="addGroup" tabindex="-1" role="dialog" aria-labelledby="addGroupLabel">
+  <li role="presentation" id="createGrp"><a href="" data-toggle="modal" data-target="#createGroup">+</a></li>
+  <div class="modal fade" id="createGroup" tabindex="-1" role="dialog" aria-labelledby="createGroupLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="addGroupLabel">添加用户组</h4>
+          <h4 class="modal-title" id="createGroupLabel">添加用户组</h4>
         </div>
         <div class="modal-body">
-          <form id="addGroup_submit">
+          <form id="createGroup_submit">
             <div class="form-group">
-                <input type="text" class="form-control" id="addGroup_name" placeholder="Group name">
+                <input type="text" class="form-control" id="createGroup_name" placeholder="Group name">
               </div>
             </div>
-            <center id="addGroup_info"></center>
+            <center id="createGroup_info"></center>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Add Group</button>
+              <button type="submit" class="btn btn-primary">Create Group</button>
             </div>
           </form>
         </div>

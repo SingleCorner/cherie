@@ -118,14 +118,20 @@ def data_execute(request):
     result['code'] = 0
     result['message'] = "拒绝非法访问"
   if module == "group":
-    if action == "add":      
+    if action == "create":      
       try:
         name = request.POST['addGroup_name']
-        obj = Group(name=name,
-                    uid=Account.objects.get(uid = request.session['user_id']),
-                    status=1,
+        group = Group(name=name,
+                      uid=Account.objects.get(uid = request.session['user_id']),
+                      status=1,
                     )
-        obj.save()
+        group.save()
+        inserted_gid = group.gid
+        groupauth = GroupAuthorize(gid = Group.objects.get(gid = inserted_gid),
+                                   uid = Account.objects.get(uid = request.session['user_id']),
+                                   privilege = 0,
+                                   )
+        groupauth.save()
         result['code'] = 0
         result['message'] = "创建组成功"
       except:

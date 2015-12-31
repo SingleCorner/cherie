@@ -10,26 +10,26 @@ $(document).ready(function() {
 	$('#nav-' + module).addClass('active');
 	$('#subnav-' + id).addClass('active');
 
-	$('#addGroup_submit').submit(addGroup);
+	$('#createGroup_submit').submit(addGroup);
 
 });
 
 
 function addGroup(evt) {
 	evt.preventDefault();
-	var group_name = $('#addGroup_name').val();
+	var group_name = $('#createGroup_name').val();
 	$.ajax({
 		type: 'POST',
 		url: '/exec',
 		data: {
 			'module': "group",
-			'action': "add",
+			'action': "create",
 			'addGroup_name': group_name,
 		},
 		timeout: 5000,
 		success: function(data, status, xhr) {
 			if (data.code == 0) {
-				$('#addGroup_info').html(data.message);
+				$('#createGroup_info').html(data.message);
 				setTimeout(function(){
 						window.location.reload();
 					},1500

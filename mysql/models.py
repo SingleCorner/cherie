@@ -14,7 +14,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Account(models.Model):
-  uid = models.IntegerField(primary_key=True)
+  uid = models.AutoField(primary_key=True)
   account = models.CharField(unique=True, max_length=15, blank=False)
   secpasswd = models.CharField(max_length=80, blank=True)
   tel = models.CharField(max_length=11, blank=True)
@@ -25,7 +25,7 @@ class Account(models.Model):
       db_table = 'Account'
 
 class Group(models.Model):
-  gid = models.IntegerField(primary_key=True)    
+  gid = models.AutoField(primary_key=True)    
   name = models.CharField(max_length=10, blank=True)
   uid = models.ForeignKey(Account, db_column='uid')
   status = models.IntegerField(blank=True)
@@ -33,7 +33,7 @@ class Group(models.Model):
       db_table = 'Group'
 
 class GroupAuthorize(models.Model):
-  id = models.IntegerField(primary_key=True)    
+  id = models.AutoField(primary_key=True)    
   gid = models.ForeignKey(Group, db_column='gid')
   uid = models.ForeignKey(Account, db_column='uid')
   privilege = models.IntegerField()
