@@ -1,3 +1,7 @@
+#环境搭建须知
+  由于本平台使用python3，使用pymysql作为mysql操作类，部署使用有任何问题，请邮件联系我。
+  需要在django的配置包里面将mysql复制成pymysql，将base.py里面的MySQLdb改成pymysql，将introspection.py里面的MySQLdb改成pymysql。
+
 # 平台介绍
   - 自动化运维平台，基于AutoO_with_django进行重写，并将本平台更名为cherie。为什么更名了呢？原因到时候将发布至博客，总之就是更名啦。
   - 从PHP版本到python2版本到现在为了能兼容目前的python3,这已经是第三次重写了。实际上也不能说是重写吧，前面2个版本都没开发完，只是在新版本上做了优化，加入了新功能，应该说是升级吧。
