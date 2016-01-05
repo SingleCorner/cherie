@@ -142,3 +142,45 @@ def data_execute(request):
   else:
     pass
   return HttpResponse(json.dumps(result), content_type="application/json")
+
+def rpc_api(request):
+  result = {}
+  if 'wechat_key' in request.POST:
+    api_Token = request.POST['wechat_key']
+    if api_Token == "":
+      result['code'] = 1
+      result['message'] = "api Token error"
+    else:
+      try:
+        userInfo = Account.objects.filter(wechat_token = api_Token, status = 1)
+        api_command = request.POST['command']
+        if api_command == "group":
+          api_subcommand = request.POST['request'].split('.')[1]
+          if api_subcommand == "list":
+            try:
+              group_list = GroupAuthorize.objects.select_related().filter(uid = userInfo[0].uid)
+              result['code'] = 0
+              result['groups'] = {}
+              i = 0
+              for group in group_list:
+                if group.privilege == 0:
+                  group_auth = "管理"
+                elif group.privilege == 1:
+                  group_auth = "运维"
+                else:
+                  group_auth = "查看"
+                result['groups'][i] = group.gid.name + " - " + group_auth
+                i = i + 1
+            except:
+              result['code'] = 1
+              result['message'] = "Group empty"
+          else:
+            result['code'] = 1
+            result['message'] = "subcommand not support"
+        else:
+          result['code'] = 1
+          result['message'] = "command not support"
+      except:
+        result['code'] = 1
+        result['message'] = "Please bind user first, type bind.account.password"
+  return HttpResponse(json.dumps(result),content_type="application/json")

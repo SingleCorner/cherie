@@ -67,7 +67,11 @@
       <td>查看</td>
     {% endifequal %}
     {% ifequal grpauth.gid.uid.uid request.session.user_id %}
-      <td><button class="btn-danger">删除组</button></td>
+      {% ifequal sid '' %}
+      <td><button class="btn-danger">禁用组</button></td>
+      {% else %}
+      <td><button class="btn-danger">删除成员</button></td>
+      {% endifequal %}
     {% else %}  
       <td></td>
     {% endifequal %}

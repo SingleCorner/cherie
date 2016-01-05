@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^user/(?P<module>.*)/(?P<sid>.*)$', views.user_module),
 		url(r'^admin/(?P<module>.*)/(?P<sid>.*)$', views.admin_module),
 		url(r'^exec$', views.data_execute),
+		url(r'^api$', views.rpc_api),
 ]
