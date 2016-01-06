@@ -155,7 +155,7 @@ def rpc_api(request):
         userInfo = Account.objects.filter(wechat_token = api_Token, status = 1)
         api_command = request.POST['command']
         if api_command == "group":
-          api_subcommand = request.POST['request'].split('.')[1]
+          api_subcommand = request.POST['request'].split(' ')[1]
           if api_subcommand == "list":
             try:
               group_list = GroupAuthorize.objects.select_related().filter(uid = userInfo[0].uid)
@@ -183,4 +183,48 @@ def rpc_api(request):
       except:
         result['code'] = 1
         result['message'] = "Please bind user first, type bind.account.password"
+  else:
+    result['code'] = 1
+    result['message'] = "wechat_key not exist"
+  return HttpResponse(json.dumps(result),content_type="application/json")
+
+def rpc_api_test(request):
+  result = {}
+  api_Token = "hello"
+  if api_Token == "":
+    result['code'] = 1
+    result['message'] = "apiToken错误"
+  else:
+    try:
+      userInfo = Account.objects.filter(wechat_token = api_Token, status = 1)
+      api_command = "group"
+      if api_command == "group":
+        api_subcommand = "group.list".split('.')[1]
+        if api_subcommand == "list":
+          try:
+            group_list = GroupAuthorize.objects.select_related().filter(uid = userInfo[0].uid)
+            result['code'] = 0
+            result['groups'] = {}
+            i = 0
+            for group in group_list:
+              if group.privilege == 0:
+                group_auth = "管理"
+              elif group.privilege == 1:
+                group_auth = "运维"
+              else:
+                group_auth = "查看"
+              result['groups'][i] = group.gid.name + " - " + group_auth
+              i = i + 1
+          except:
+            result['code'] = 1
+            result['message'] = "Group empty"
+        else:
+          result['code'] = 1
+          result['message'] = "subcommand not supported"
+      else:
+        result['code'] = 1
+        result['message'] = "command not supported"
+    except:
+      result['code'] = 1
+      result['message'] = "User not exist"
   return HttpResponse(json.dumps(result),content_type="application/json")

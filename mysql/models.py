@@ -16,7 +16,7 @@ from django.db import models
 class Account(models.Model):
   uid = models.AutoField(primary_key=True)
   account = models.CharField(unique=True, max_length=15, blank=False)
-  wechat_token = models.CharField(unique=True, max_length=20, null=True)
+  wechat_token = models.CharField(unique=True, max_length=40, null=True)
   secpasswd = models.CharField(max_length=80, blank=True)
   tel = models.CharField(max_length=11, blank=True)
   mail = models.CharField(max_length=40, blank=True)

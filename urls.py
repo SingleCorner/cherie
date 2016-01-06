@@ -12,7 +12,8 @@ urlpatterns = [
     url(r'^signout$', views.user_signout),
     url(r'^signup$', views.user_signup),
     url(r'^user/(?P<module>.*)/(?P<sid>.*)$', views.user_module),
-		url(r'^admin/(?P<module>.*)/(?P<sid>.*)$', views.admin_module),
-		url(r'^exec$', views.data_execute),
-		url(r'^api$', views.rpc_api),
+    url(r'^admin/(?P<module>.*)/(?P<sid>.*)$', views.admin_module),
+    url(r'^exec$', views.data_execute),
+    url(r'^api$', views.rpc_api),
+    url(r'^apitest$', views.rpc_api_test),
 ]
