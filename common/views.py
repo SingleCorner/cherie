@@ -187,7 +187,28 @@ def rpc_api(request):
         result['code'] = 1
         result['message'] = "group未带有参数\n详细帮助请输入 ?"
     elif api_command[0] == "bind":
-      pass
+      if len(api_command) == 3:
+        cherie_account = api_command[1]
+        cherie_password = api_command[2]
+        try:
+          user = Account.objects.filter(account = cherie_account, wechat_token__isnull = True)
+          user_id = user[0].uid
+        except:
+          user = ""
+        if user == "":
+          result['code'] = 1
+          result['message'] = "绑定失败：超过一个绑定或者账号不存在"
+        else:
+          if check_password(cherie_password,user[0].secpasswd):
+            Account.objects.filter(uid = user_id).update(wechat_token = api_token)
+            result['code'] = 1
+            result['message'] = cherie_account + "用户绑定成功\n欢迎使用本平台"
+          else:
+            result['code'] = 1
+            result['message'] = "绑定失败：密码错误"
+      else:
+        result['code'] = 1
+        result['message'] = "绑定参数出错,输入\nbind 运维平台用户名 运维平台密码"
     else:
       result['code'] = 1
       result['message'] = "尚未支持的指令"
