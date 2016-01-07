@@ -145,22 +145,28 @@ def data_execute(request):
 
 def rpc_api(request):
   result = {}
-  if 'wechat_key' in request.POST:
-    api_Token = request.POST['wechat_key']
-    if api_Token == "":
-      result['code'] = 1
-      result['message'] = "api Token error"
-    else:
-      try:
-        userInfo = Account.objects.filter(wechat_token = api_Token, status = 1)
-        api_command = request.POST['command']
-        if api_command == "group":
-          api_subcommand = request.POST['request'].split(' ')[1]
+  if 'wechat_key' in request.POST and 'request' in request.POST:
+    api_token = request.POST['wechat_key']
+    api_request = request.POST['request']
+    api_command = api_request.split(' ')
+    if api_command[0] == "group":
+      if len(api_command) > 1:
+        api_subcommand = api_command[1]
+        try:
+          user = Account.objects.filter(wechat_token = api_token, status = 1)
+          user_id = user[0].uid
+          user_name = user[0].account
+        except:
+          user_id = ""
+        if user_id == "":
+          result['code'] = 1
+          result['message'] = "尚未绑定平台用户\n[绑定指令]bind account password"
+        else:
           if api_subcommand == "list":
             try:
-              group_list = GroupAuthorize.objects.select_related().filter(uid = userInfo[0].uid)
+              group_list = GroupAuthorize.objects.select_related().filter(uid = user_id)
               result['code'] = 0
-              result['groups'] = {}
+              result['group'] = {}
               i = 0
               for group in group_list:
                 if group.privilege == 0:
@@ -169,28 +175,76 @@ def rpc_api(request):
                   group_auth = "运维"
                 else:
                   group_auth = "查看"
-                result['groups'][i] = group.gid.name + " - " + group_auth
+                result['group'][i] = group.gid.name + " - " + group_auth
                 i = i + 1
             except:
               result['code'] = 1
-              result['message'] = "Group empty"
+              result['message'] = "获取用户组失败，请确定是否已经创建用户组\n联系CSZ9227获取帮助"
           else:
             result['code'] = 1
-            result['message'] = "subcommand not support"
-        else:
-          result['code'] = 1
-          result['message'] = "command not support"
-      except:
+            result['message'] = "尚未支持的参数"
+      else:
         result['code'] = 1
-        result['message'] = "Please bind user first, type bind account password"
+        result['message'] = "group未带有参数\n详细帮助请输入 ?"
+    elif api_command[0] == "bind":
+      pass
+    else:
+      result['code'] = 1
+      result['message'] = "尚未支持的指令"
   else:
     result['code'] = 1
-    result['message'] = "wechat_key not exist"
+    result['message'] = "非法操作"
   return HttpResponse(json.dumps(result),content_type="application/json")
 
 def rpc_api_test(request):
   result = {}
-  result['a'] = request.POST['wechat_key']
-  result['b'] = request.POST['request']
-  result['c'] = request.POST['command']
+  if 'wechat_key' in request.POST and 'request' in request.POST:
+    api_token = request.POST['wechat_key']
+    api_request = request.POST['request']
+    api_command = api_request.split(' ')
+    if api_command[0] == "group":
+      if len(api_command) > 1:
+        api_subcommand = api_command[1]
+        try:
+          user = Account.objects.filter(wechat_token = api_token, status = 1)
+          user_id = user[0].uid
+          user_name = user[0].account
+        except:
+          user_id = ""
+        if user_id == "":
+          result['code'] = 1
+          result['message'] = "尚未绑定平台用户\n[绑定指令]bind account password"
+        else:
+          if api_subcommand == "list":
+            try:
+              group_list = GroupAuthorize.objects.select_related().filter(uid = user_id)
+              result['code'] = 0
+              result['group'] = {}
+              i = 0
+              for group in group_list:
+                if group.privilege == 0:
+                  group_auth = "管理"
+                elif group.privilege == 1:
+                  group_auth = "运维"
+                else:
+                  group_auth = "查看"
+                result['group'][i] = group.gid.name + " - " + group_auth
+                i = i + 1
+            except:
+              result['code'] = 1
+              result['message'] = "获取用户组失败，请确定是否已经创建用户组\n联系CSZ9227获取帮助"
+          else:
+            result['code'] = 1
+            result['message'] = "尚未支持的参数"
+      else:
+        result['code'] = 1
+        result['message'] = "group未带有参数\n详细帮助请输入 ?"
+    elif api_command[0] == "bind":
+      pass
+    else:
+      result['code'] = 1
+      result['message'] = "尚未支持的指令"
+  else:
+    result['code'] = 1
+    result['message'] = "非法操作"
   return HttpResponse(json.dumps(result),content_type="application/json")
