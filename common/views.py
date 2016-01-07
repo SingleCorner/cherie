@@ -205,9 +205,13 @@ def rpc_api(request):
           result['message'] = "绑定失败：已绑定，多账号绑定，账号不存在"
         else:
           if check_password(cherie_password,user[0].secpasswd):
-            Account.objects.filter(uid = user_id).update(wechat_token = api_token)
-            result['code'] = 1
-            result['message'] = cherie_account + "用户绑定成功\n欢迎使用本平台"
+            try:
+              Account.objects.filter(uid = user_id).update(wechat_token = api_token)
+              result['code'] = 1
+              result['message'] = cherie_account + "用户绑定成功\n欢迎使用本平台"
+            except:
+              result['code'] = 1
+              result['message'] = "用户绑定失败：原因未知"
           else:
             result['code'] = 1
             result['message'] = "绑定失败：密码错误"
