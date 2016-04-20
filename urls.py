@@ -16,5 +16,4 @@ urlpatterns = [
     url(r'^exec$', views.data_execute),
     url(r'^api$', views.rpc_api),
     url(r'^apitest$', views.rpc_api_test),
-    url(r'^hmc_demo$',views.hmc_demo),
 ]
