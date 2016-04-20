@@ -2,6 +2,7 @@
   由于本平台使用python3，使用pymysql作为mysql操作类，部署使用有任何问题，请邮件联系我。
   需要在django的配置包里面将mysql复制成pymysql，将base.py里面的MySQLdb改成pymysql，将introspection.py里面的MySQLdb改成pymysql。
 
+[build][Build Status]
 [![Build Status](http://ops.siner.us:8080/buildStatus/icon?job=production_cherie_deploying)](http://ops.siner.us:8080/job/production_cherie_deploying/)
 
 # 平台介绍
