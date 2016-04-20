@@ -106,6 +106,8 @@ def user_module(request, module, sid):
 def admin_module(request, module, sid):
   rsp = render(request, 'developing.html', locals())
   return HttpResponse(rsp)
+def hmc_demo(request):
+  return HttpResponse("Hello world")
 
 def data_execute(request):
   result = {}
