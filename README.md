@@ -2,8 +2,7 @@
   由于本平台使用python3，使用pymysql作为mysql操作类，部署使用有任何问题，请邮件联系我。
   需要在django的配置包里面将mysql复制成pymysql，将base.py里面的MySQLdb改成pymysql，将introspection.py里面的MySQLdb改成pymysql。
 
-[build][Build Status]
-[![Build Status](http://ops.siner.us:8080/buildStatus/icon?job=production_cherie_deploying)](http://ops.siner.us:8080/job/production_cherie_deploying/)
+[![Build Status](http://ops.siner.us:8080/buildStatus/icon?job=production_cherie_deploying)](http://ops.siner.us:8080/job/production_cherie_deploying)
 
 # 平台介绍
   - 自动化运维平台，基于AutoO_with_django进行重写，并将本平台更名为cherie。为什么更名了呢？原因到时候将发布至博客，总之就是更名啦。
