@@ -61,3 +61,5 @@ bootstrap.min.css
 bootstrap.min.js
 jquery.min.js
 jquery.min.map
+deploy.4jenkins
+settings.py

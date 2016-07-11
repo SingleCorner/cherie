@@ -4,16 +4,16 @@
 ###
 ### DO NOT PUT THIS FILE ON YOUR OWN PROJECT
 ###
-### Please run this script like Your_Project_Path@host$bash /yous/scripts/path/deploy.4jenkins
+### Please run this script like Your_Project_Path@host$ bash /yous/scripts/path/deploy.sh
 ###
 ####################
 cp -f settings.py.sample settings.py
 
-MYSQL_HOST="host"
-MYSQL_PORT="port"
-MYSQL_USER="user"
-MYSQL_PASS="pass"
-MYSQL_NAME="name"
+MYSQL_HOST=""
+MYSQL_PORT="3306"
+MYSQL_USER=""
+MYSQL_PASS=""
+MYSQL_NAME="cherie"
 
 
 sed -i s/##MYSQL_default_HOST##/$MYSQL_HOST/g settings.py
